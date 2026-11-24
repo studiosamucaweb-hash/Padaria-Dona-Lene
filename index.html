@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Padaria Dona Lene — Pães Fresquinhos, Salgados e Café da Manhã</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-white: #ffffff;
+      --bg-warm: #fff8f7;
+      --bg-warm-alt: #fdf1ef;
+      --text-primary: #1f1a1a;
+      --text-secondary: #5c5252;
+      --text-muted: #7a6f6f;
+      --red-primary: #c82333;
+      --red-hover: #a71d2a;
+      --red-soft: rgba(200, 35, 51, 0.08);
+      --border-light: #efe2e0;
+      --border-red: rgba(200, 35, 51, 0.25);
+      --shadow-sm: 0 4px 14px rgba(31, 26, 26, 0.05);
+      --shadow-md: 0 10px 26px rgba(31, 26, 26, 0.08);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --container-max: 1120px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-white);
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, .brand-title {
+      font-family: 'Fraunces', Georgia, serif;
+      margin: 0;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+    }
+
+    p {
+      margin: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* Botões */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--red-primary);
+      color: #ffffff;
+      border: 1px solid var(--red-primary);
+      box-shadow: 0 4px 12px rgba(200, 35, 51, 0.22);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background-color: var(--red-hover);
+      border-color: var(--red-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(167, 29, 42, 0.28);
+    }
+
+    .btn-outline {
+      background-color: var(--bg-white);
+      color: var(--red-primary);
+      border: 1.5px solid var(--border-red);
+    }
+
+    .btn-outline:hover,
+    .btn-outline:focus-visible {
+      background-color: var(--bg-warm);
+      border-color: var(--red-primary);
+      color: var(--red-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    /* 1. Cabeçalho fixo */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 76px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--red-primary);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 1.28rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    header .btn {
+      min-height: 44px;
+      padding: 10px 18px;
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    /* 2. Abertura (Hero) */
+    .hero {
+      background:
+        radial-gradient(circle at 90% 15%, rgba(200, 35, 51, 0.08), transparent 45%),
+        linear-gradient(180deg, var(--bg-warm) 0%, var(--bg-white) 100%);
+      padding-top: 68px;
+      padding-bottom: 72px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .hero-content {
+      max-width: 740px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--bg-warm-alt);
+      color: var(--red-primary);
+      border: 1px solid var(--border-red);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.84rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.05rem, 4.8vw, 3.2rem);
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: clamp(1.02rem, 2vw, 1.16rem);
+      color: var(--text-secondary);
+      max-width: 630px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Seções gerais */
+    section {
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-eyebrow {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--red-primary);
+      margin-bottom: 6px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .section-header p {
+      color: var(--text-secondary);
+      max-width: 620px;
+    }
+
+    /* 3. Vitrine / Cardápio interativo */
+    .menu-section {
+      background-color: var(--bg-white);
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .filter-btn {
+      min-height: 44px;
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--border-light);
+      background-color: var(--bg-warm);
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn:focus-visible {
+      border-color: var(--red-primary);
+      color: var(--red-primary);
+      background-color: var(--bg-white);
+    }
+
+    .filter-btn.active {
+      background-color: var(--red-primary);
+      border-color: var(--red-primary);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(200, 35, 51, 0.22);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .menu-card {
+      background-color: var(--bg-warm);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .menu-card:hover {
+      background-color: var(--bg-white);
+      border-color: var(--border-red);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .menu-card.hidden {
+      display: none;
+    }
+
+    .category-pill {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--red-primary);
+      background-color: var(--red-soft);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 10px;
+    }
+
+    .menu-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .menu-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--red-primary);
+      padding-top: 6px;
+      transition: color 0.2s ease;
+    }
+
+    .card-link:hover {
+      color: var(--red-hover);
+      text-decoration: underline;
+    }
+
+    /* 4. Localização e Horário */
+    .location-section {
+      background-color: var(--bg-warm);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .info-box {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-left: 4px solid var(--red-primary);
+      border-radius: var(--radius-md);
+      padding: 26px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .info-box h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .info-box p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    /* 5. Rodapé */
+    footer {
+      background-color: #1f1a1a;
+      color: #fff8f7;
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .footer-text {
+      color: #dfd3d2;
+      font-size: 0.96rem;
+      max-width: 480px;
+    }
+
+    /* Responsividade Tablet e Desktop */
+    @media (min-width: 640px) {
+      .container {
+        padding-left: 28px;
+        padding-right: 28px;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero {
+        padding-top: 88px;
+        padding-bottom: 92px;
+      }
+
+      section {
+        padding-top: 84px;
+        padding-bottom: 84px;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+    }
+
+    /* Ajustes para celulares estreitos */
+    @media (max-width: 430px) {
+      .brand-title {
+        font-size: 1.08rem;
+      }
+
+      .brand-badge {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+      }
+
+      header .btn {
+        padding: 9px 12px;
+        font-size: 0.8rem;
+      }
+
+      .hero .btn,
+      footer .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Cabeçalho fixo -->
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="brand">
+        <span class="brand-badge" aria-hidden="true">DL</span>
+        <span class="brand-title">Padaria Dona Lene</span>
+      </a>
+      <a
+        href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+        class="btn btn-primary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Pedir no WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- 2. Abertura (Hero) -->
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-tag">Fornadas quentinhas todos os dias</span>
+          <h1>Pães fresquinhos, salgados assados na hora e café da manhã completo.</h1>
+          <p>
+            O sabor caseiro e o carinho de padaria de bairro para começar bem o seu dia ou garantir o lanche da tarde sem sair de casa.
+          </p>
+          <div class="hero-actions">
+            <a
+              href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+              class="btn btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Fazer pedido ou encomenda no WhatsApp
+            </a>
+            <a href="#cardapio" class="btn btn-outline">Ver cardápio</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Vitrine / Cardápio interativo por categoria -->
+    <section class="menu-section" id="cardapio">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Nosso Cardápio</span>
+          <h2>Feito com receitas tradicionais e ingredientes frescos</h2>
+          <p>Escolha uma categoria abaixo para navegar entre nossos salgados artesanais e opções completas de café da manhã.</p>
+        </div>
+
+        <!-- Filtros por categoria -->
+        <div class="filter-bar" role="tablist" aria-label="Filtrar itens do cardápio">
+          <button type="button" class="filter-btn active" data-filter="todos" role="tab" aria-selected="true">Todos</button>
+          <button type="button" class="filter-btn" data-filter="salgados" role="tab" aria-selected="false">Salgados</button>
+          <button type="button" class="filter-btn" data-filter="cafes" role="tab" aria-selected="false">Cafés da Manhã</button>
+        </div>
+
+        <!-- Cartões do cardápio -->
+        <div class="menu-grid" id="menu-grid">
+
+          <!-- Salgados -->
+          <article class="menu-card" data-category="salgados">
+            <div>
+              <span class="category-pill">Salgados</span>
+              <h3>Coxinha de frango com catupiry</h3>
+              <p>Massa macia e douradinha por fora, recheada com frango desfiado bem temperado e cremoso catupiry.</p>
+            </div>
+            <a
+              href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+              class="card-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir pelo WhatsApp &rarr;
+            </a>
+          </article>
+
+          <article class="menu-card" data-category="salgados">
+            <div>
+              <span class="category-pill">Salgados</span>
+              <h3>Esfiha de carne</h3>
+              <p>Massa fofinha assada no ponto certo, com recheio suculento de carne moída, tomate, cebola e toque de limão.</p>
+            </div>
+            <a
+              href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+              class="card-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir pelo WhatsApp &rarr;
+            </a>
+          </article>
+
+          <article class="menu-card" data-category="salgados">
+            <div>
+              <span class="category-pill">Salgados</span>
+              <h3>Pastel de forno (frango ou palmito)</h3>
+              <p>Massa leve que derrete na boca, assada até dourar, nas opções de frango temperado ou palmito cremoso.</p>
+            </div>
+            <a
+              href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+              class="card-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir pelo WhatsApp &rarr;
+            </a>
+          </article>
+
+          <article class="menu-card" data-category="salgados">
+            <div>
+              <span class="category-pill">Salgados</span>
+              <h3>Joelho (presunto e queijo)</h3>
+              <p>Clássico de padaria com massa macia e generosas fatias de presunto, muçarela derretida e orégano.</p>
+            </div>
+            <a
+              href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+              class="card-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir pelo WhatsApp &rarr;
+            </a>
+          </article>
+
+          <article class="menu-card" data-category="salgados">
+            <div>
+              <span class="category-pill">Salgados</span>
+              <h3>Quibe frito</h3>
+              <p>Casquinha crocante por fora e interior macio, preparado com trigo fino, carne selecionada e hortelã fresca.</p>
+            </div>
+            <a
+              href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+              class="card-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir pelo WhatsApp &rarr;
+            </a>
+          </article>
+
+          <article class="menu-card" data-category="salgados">
+            <div>
+              <span class="category-pill">Salgados</span>
+              <h3>Empada de palmito</h3>
+              <p>Massa podre artesanal bem delicada, com recheio farto de palmito macio e tempero caseiro da Dona Lene.</p>
+            </div>
+            <a
+              href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+              class="card-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir pelo WhatsApp &rarr;
+            </a>
+          </article>
+
+          <!-- Cafés da Manhã -->
+          <article class="menu-card" data-category="cafes">
+            <div>
+              <span class="category-pill">Cafés da Manhã</span>
+              <h3>Café da Manhã Tradicional</h3>
+              <p>Pão francês crocante na chapa com manteiga, café coado fresquinho na hora, fatias de queijo prato e presunto.</p>
+            </div>
+            <a
+              href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+              class="card-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir pelo WhatsApp &rarr;
+            </a>
+          </article>
+
+          <article class="menu-card" data-category="cafes">
+            <div>
+              <span class="category-pill">Cafés da Manhã</span>
+              <h3>Combo Família/Casal</h3>
+              <p>Cesta com pães variados, croissants folhados, seleção de frios, suco natural gelado e café passado na hora.</p>
+            </div>
+            <a
+              href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+              class="card-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir pelo WhatsApp &rarr;
+            </a>
+          </article>
+
+          <article class="menu-card" data-category="cafes">
+            <div>
+                            <span class="category-pill">Cafés da Manhã</span>
+              <h3>Café da Manhã Fit/Leve</h3>
+              <p>Pão integral tostado, ovos mexidos cremosos, porção de frutas frescas da estação e café ou chá natural.</p>
+            </div>
+            <a
+              href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+              class="card-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir pelo WhatsApp &rarr;
+            </a>
+          </article>
+
+          <article class="menu-card" data-category="cafes">
+            <div>
+              <span class="category-pill">Cafés da Manhã</span>
+              <h3>Pão de Queijo Quentinho com Café Expresso</h3>
+              <p>Porção de pães de queijo assados na hora, crocantes por fora e macios por dentro, acompanhados de expresso.</p>
+            </div>
+            <a
+              href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+              class="card-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir pelo WhatsApp &rarr;
+            </a>
+          </article>
+
+          <article class="menu-card" data-category="cafes">
+            <div>
+              <span class="category-pill">Cafés da Manhã</span>
+              <h3>Misto Quente na Chapa com Suco de Laranja</h3>
+              <p>Pão de forma ou francês prensado na chapa com queijo derretido e presunto, servido com suco natural espremido na hora.</p>
+            </div>
+            <a
+              href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+              class="card-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir pelo WhatsApp &rarr;
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Localização e Horário -->
+    <section class="location-section" id="localizacao">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Onde Estamos</span>
+          <h2>Localização e Horário de Funcionamento</h2>
+          <p>Passe para tomar um café conosco ou faça sua encomenda antecipada pelo WhatsApp.</p>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-box">
+            <h3>Endereço</h3>
+            <p>Rua das Acácias, nº 412 — Vila Nova</p>
+          </div>
+          <div class="info-box">
+            <h3>Horário de Atendimento</h3>
+            <p>Terça a domingo, das 6h às 20h</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 5. Rodapé -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">Padaria Dona Lene</div>
+        <p class="footer-text">Pães fresquinhos, salgados assados na hora e aquele café passado com carinho todos os dias.</p>
+      </div>
+      <a
+        href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene%20e%20gostaria%20de%20fazer%20um%20pedido%20ou%20tirar%20uma%20d%C3%BAvida."
+        class="btn btn-primary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Chamar no WhatsApp
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const menuCards = document.querySelectorAll('.menu-card');
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+
+        filterButtons.forEach((btn) => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+
+        menuCards.forEach((card) => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'todos' || category === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
